@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>호연빌리지</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      max-width: 800px;
+      margin: auto;
+      padding: 10px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 32px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+      background-color: #eee;
+      padding: 10px 0;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #0077cc;
+    }
+
+    #content {
+      min-height: 200px;
+    }
+
+    .slider {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+      background-color: #000;
+    }
+
+    .slider img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .img-grid {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .img-grid img {
+      width: 48%;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #999;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+        font-size: 16px;
+      }
+
+      .img-grid img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>호연빌리지 🏡</h1>
+  </header>
+
+  <nav>
+    <a onclick="showContent('home')">홈</a>
+    <a onclick="showContent('photo')">펜션 사진</a>
+    <a onclick="showContent('reserve')">펜션예약</a>
+  </nav>
+
+  <div id="content">
+    <h2>홈</h2>
+    <div class="slider">
+      <img id="slide-image" src="images/home1.jpeg" alt="펜션 사진" />
+    </div>
+    <p>태안 파도리에 위치한 독채 펜션 호연빌리지입니다.</p>
+  </div>
+
+  <footer>
+    © 2025 호연빌리지
+  </footer>
+
+  <script>
+    function showContent(category) {
+      const contentBox = document.getElementById('content');
+      let html = '';
+
+      if (category === 'home') {
+        html = `
+          <h2>홈</h2>
+          <div class="slider">
+            <img id="slide-image" src="images/home1.jpeg" alt="펜션 사진" />
+          </div>
+          <p>태안 파도리에 위치한 독채 펜션 호연빌리지입니다.</p>
+        `;
+        contentBox.innerHTML = html;
+        startSlider();
+      } else if (category === 'photo') {
+        html = `
+          <h2>펜션 사진</h2>
+          <p>호연빌리지의 다양한 공간을 사진으로 만나보세요.</p>
+
+          <img src="images/home1.jpeg" alt="펜션 대표 사진" style="width:100%; border-radius:10px; margin-bottom:20px;" />
+
+          <h3>펜션 내부</h3>
+          <p>아늑한 침실, 깔끔한 주방과 거실이 준비되어 있습니다.</p>
+          <div class="img-grid">
+            <img src="images/room1.jpeg" alt="침실 사진" />
+            <img src="images/room2.jpeg" alt="거실 사진" />
+          </div>
+
+          <h3>외부 전경</h3>
+          <p>정원, 바베큐장, 주변 자연의 풍경을 감상해보세요.</p>
+          <div class="img-grid">
+            <img src="images/outside1.jpeg" alt="정원 사진" />
+            <img src="images/outside2.jpeg" alt="바베큐장 사진" />
+          </div>
+        `;
+        contentBox.innerHTML = html;
+      } else if (category === 'reserve') {
+        html = `
+          <h2>펜션예약</h2>
+          <p>예약은 전화로만 가능합니다.</p>
+          <p style="margin-top:20px;">이용 전 꼭 확인해 주세요.</p>
+          <img src="images/guide.jpeg" alt="펜션 이용안내" style="width:100%; border-radius:10px; margin-top:10px;">
+        `;
+        contentBox.innerHTML = html;
+      }
+    }
+
+    function startSlider() {
+      const images = [
+        "images/home1.jpeg",
+        "images/home2.jpeg",
+        "images/home3.jpeg"
+      ];
+
+      let index = 0;
+      const slideImage = document.getElementById("slide-image");
+
+      setInterval(() => {
+        index = (index + 1) % images.length;
+        if (slideImage) {
+          slideImage.src = images[index];
+        }
+      }, 3000);
+    }
+
+    window.onload = startSlider;
+  </script>
+</body>
+</html>
+

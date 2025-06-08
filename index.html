@@ -53,7 +53,7 @@
 
     .slider {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 1426 / 950;
       border-radius: 10px;
       overflow: hidden;
       margin: 20px 0;
@@ -66,15 +66,53 @@
       object-fit: contain;
     }
 
-    .img-grid {
+    .photo-tabs, .interior-tabs {
       display: flex;
       gap: 10px;
+      margin: 20px 0;
       flex-wrap: wrap;
-      margin-bottom: 20px;
     }
 
-    .img-grid img {
-      width: 48%;
+    .tab-btn {
+      padding: 8px 16px;
+      border: none;
+      background: #ddd;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .tab-btn.active {
+      background: #333;
+      color: white;
+    }
+
+    .gallery {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .gallery.active {
+      display: flex;
+    }
+
+    .sub-gallery-group {
+      display: none;
+    }
+
+    .sub-gallery-group.active {
+      display: block;
+    }
+
+    .sub-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .sub-gallery img {
+      width: 100%;
       border-radius: 10px;
     }
 
@@ -82,22 +120,6 @@
       text-align: center;
       margin-top: 40px;
       color: #999;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 24px;
-      }
-
-      nav {
-        flex-direction: column;
-        align-items: center;
-        font-size: 16px;
-      }
-
-      .img-grid img {
-        width: 100%;
-      }
     }
   </style>
 </head>
@@ -115,7 +137,7 @@
   <div id="content">
     <h2>홈</h2>
     <div class="slider">
-      <img id="slide-image" src="images/home1.jpeg" alt="펜션 사진" />
+      <img id="slide-image" src="images/outside1.jpeg" alt="펜션 사진" />
     </div>
     <p>태안 파도리에 위치한 독채 펜션 호연빌리지입니다.</p>
   </div>
@@ -133,7 +155,7 @@
         html = `
           <h2>홈</h2>
           <div class="slider">
-            <img id="slide-image" src="images/home1.jpeg" alt="펜션 사진" />
+            <img id="slide-image" src="images/outside1.jpeg" alt="펜션 사진" />
           </div>
           <p>태안 파도리에 위치한 독채 펜션 호연빌리지입니다.</p>
         `;
@@ -143,24 +165,82 @@
         html = `
           <h2>펜션 사진</h2>
           <p>호연빌리지의 다양한 공간을 사진으로 만나보세요.</p>
-
-          <img src="images/home1.jpeg" alt="펜션 대표 사진" style="width:100%; border-radius:10px; margin-bottom:20px;" />
-
-          <h3>펜션 내부</h3>
-          <p>아늑한 침실, 깔끔한 주방과 거실이 준비되어 있습니다.</p>
-          <div class="img-grid">
-            <img src="images/room1.jpeg" alt="침실 사진" />
-            <img src="images/room2.jpeg" alt="거실 사진" />
+          <div class="photo-tabs">
+            <button class="tab-btn active" onclick="showGallery('interior', this)">펜션 내부</button>
+            <button class="tab-btn" onclick="showGallery('outside', this)">펜션 외부</button>
+            <button class="tab-btn" onclick="showGallery('scenery', this)">주변 풍경</button>
+            <button class="tab-btn" onclick="showGallery('bbq', this)">바베큐장</button>
           </div>
 
-          <h3>외부 전경</h3>
-          <p>정원, 바베큐장, 주변 자연의 풍경을 감상해보세요.</p>
-          <div class="img-grid">
-            <img src="images/outside1.jpeg" alt="정원 사진" />
-            <img src="images/outside2.jpeg" alt="바베큐장 사진" />
+          <div class="gallery active" id="interior">
+            <div class="photo-tabs interior-tabs">
+              <button class="tab-btn active" onclick="showSubGallery('living', this)">1층 거실</button>
+              <button class="tab-btn" onclick="showSubGallery('kitchen', this)">1층 부엌</button>
+              <button class="tab-btn" onclick="showSubGallery('bathroom', this)">1층 화장실</button>
+              <button class="tab-btn" onclick="showSubGallery('stairs', this)">계단</button>
+              <button class="tab-btn" onclick="showSubGallery('bedroom', this)">2층 침실</button>
+            </div>
+            <div class="sub-gallery-group active" id="living">
+              <div class="sub-gallery">
+                <img src="images/living1.jpeg" />
+                <img src="images/living2.jpeg" />
+              </div>
+            </div>
+            <div class="sub-gallery-group" id="kitchen">
+              <div class="sub-gallery">
+                <img src="images/kitchen1.jpeg" />
+                <img src="images/kitchen2.jpeg" />
+                <img src="images/kitchen3.jpeg" />
+              </div>
+            </div>
+            <div class="sub-gallery-group" id="bathroom">
+              <div class="sub-gallery">
+                <img src="images/bathroom1.jpeg" />
+              </div>
+            </div>
+            <div class="sub-gallery-group" id="stairs">
+              <div class="sub-gallery">
+                <img src="images/stairs1.jpeg" />
+                <img src="images/stairs2.jpeg" />
+              </div>
+            </div>
+            <div class="sub-gallery-group" id="bedroom">
+              <div class="sub-gallery">
+                <img src="images/bedroom1.jpeg" />
+                <img src="images/bedroom2.jpeg" />
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery" id="outside">
+            <div class="sub-gallery">
+              <img src="images/outside1.jpeg" />
+              <img src="images/outside2.jpeg" />
+              <img src="images/outside3.jpeg" />
+              <img src="images/outside4.jpeg" />
+            </div>
+          </div>
+
+          <div class="gallery" id="scenery">
+            <div class="sub-gallery">
+              <img src="images/scenery1.jpeg" />
+              <img src="images/scenery2.jpeg" />
+              <img src="images/scenery3.jpeg" />
+              <img src="images/scenery4.jpeg" />
+              <img src="images/scenery5.jpeg" />
+            </div>
+          </div>
+
+          <div class="gallery" id="bbq">
+            <div class="sub-gallery">
+              <img src="images/bbq1.jpeg" />
+              <img src="images/bbq2.jpeg" />
+              <img src="images/bbq3.jpeg" />
+            </div>
           </div>
         `;
         contentBox.innerHTML = html;
+        attachInteriorTabs();
       } else if (category === 'reserve') {
         html = `
           <h2>펜션예약</h2>
@@ -172,26 +252,46 @@
       }
     }
 
+    function showGallery(id, btn) {
+      document.querySelectorAll('.photo-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery').forEach(g => g.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function showSubGallery(id, btn) {
+      document.querySelectorAll('.interior-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.sub-gallery-group').forEach(g => g.classList.remove('active'));
+      const activeGroup = document.getElementById(id);
+      if (activeGroup) activeGroup.classList.add('active');
+    }
+
+    function attachInteriorTabs() {
+      const defaultTab = document.querySelector('.interior-tabs .tab-btn.active');
+      if (defaultTab) {
+        const id = defaultTab.getAttribute('onclick').match(/'(.+?)'/)[1];
+        showSubGallery(id, defaultTab);
+      }
+    }
+
     function startSlider() {
       const images = [
-        "images/home1.jpeg",
-        "images/home2.jpeg",
-        "images/home3.jpeg"
+        "images/outside1.jpeg",
+        "images/living1.jpeg",
+        "images/kitchen1.jpeg",
+        "images/bedroom1.jpeg",
+        "images/bbq3.jpeg"
       ];
-
       let index = 0;
       const slideImage = document.getElementById("slide-image");
-
       setInterval(() => {
         index = (index + 1) % images.length;
-        if (slideImage) {
-          slideImage.src = images[index];
-        }
-      }, 3000);
+        if (slideImage) slideImage.src = images[index];
+      }, 2000);
     }
 
     window.onload = startSlider;
   </script>
 </body>
 </html>
-

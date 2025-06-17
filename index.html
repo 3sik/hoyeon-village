@@ -241,15 +241,56 @@
         `;
         contentBox.innerHTML = html;
         attachInteriorTabs();
+      <!-- 중략: head, body 시작 등 동일 -->
       } else if (category === 'reserve') {
         html = `
-          <h2>펜션예약</h2>
-          <p>예약은 전화로만 가능합니다.</p>
-          <p style="margin-top:20px;">이용 전 꼭 확인해 주세요.</p>
-          <img src="images/guide.jpeg" alt="펜션 이용안내" style="width:100%; border-radius:10px; margin-top:10px;">
+          <h2 style="text-align:center; color:#2c3e50;">펜션 예약 안내 🏡</h2>
+
+          <div style="background:#fff0f6; border-radius:10px; padding:20px; margin-top:20px;">
+            <h3 style="margin-top:30px;">📞 예약문의</h3>
+            <p><strong>전화번호:</strong> <a href="tel:010-4815-9415" style="color:#0077cc;">010-4815-9415</a></p>
+            
+            <p><strong>입실 시간</strong> ⏰ : 오후 3시<br>
+              <strong>퇴실 시간</strong> 🏃‍♂️ : 오전 11시</p>
+
+            <p><strong>기준 인원</strong> 👨‍👩‍👧‍👦 : 6명 / <strong>최대 인원</strong> : 10명</p>
+
+            <h3 style="margin-top:20px;">📅 시즌 요금</h3>
+            <ul>
+              <li><strong>성수기</strong> 
+                <ul>
+                  <li>평일: 200,000원</li>
+                  <li>금요일: 230,000원</li>
+                  <li>주말: 250,000원</li>
+                </ul>
+              </li>
+              <li><strong>극성수기</strong>
+                <ul>
+                  <li>평일: 270,000원</li>
+                  <li>금요일: 300,000원</li>
+                  <li>주말: 350,000원</li>
+                </ul>
+              </li>
+            </ul>
+
+            <h3>👤 인원 추가 요금</h3>
+            <ul>
+              <li>성인: 20,000원</li>
+              <li>아동: 10,000원</li>
+              <li>유아 (3~7세): 무료</li>
+            </ul>
+
+            <h3>🍖 바베큐 이용</h3>
+            <p>숯 + 그릴 + 번개탄 2개: 20,000원</p>
+            <p>바베큐 이용은 사전 예약 필수입니다.</p>
+
+            
+          </div>
+
         `;
         contentBox.innerHTML = html;
       }
+
     }
 
     function showGallery(id, btn) {

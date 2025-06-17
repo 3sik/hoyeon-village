@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>호연빌리지</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Noto Sans KR','Arial', sans-serif;
       background-color: #fafafa;
       color: #333;
       max-width: 800px;
@@ -66,25 +70,52 @@
       object-fit: contain;
     }
 
-    .photo-tabs, .interior-tabs {
+    .photo-tabs {
       display: flex;
       gap: 10px;
       margin: 20px 0;
       flex-wrap: wrap;
+      justify-content: center; /* 상위 탭 가운데 정렬 */
+    }
+
+    .interior-tabs {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+      /* justify-content는 빼두세요: 기본 좌측 정렬 유지 */
     }
 
     .tab-btn {
-      padding: 8px 16px;
-      border: none;
-      background: #ddd;
-      cursor: pointer;
-      border-radius: 4px;
+        all: unset;
+        padding: 8px 16px;
+        cursor: pointer;
     }
 
-    .tab-btn.active {
-      background: #333;
-      color: white;
+    /* 상위 카테고리 버튼 스타일 (photo-tabs 전용) */
+    .photo-tabs .tab-btn {
+      padding: 10px 20px;
+      background-color: #f3f4f6;
+      color: #555;
+      border: none;
+      border-radius: 20px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+
+    .photo-tabs .tab-btn:hover {
+      background-color: #d1d5db; /* 연한 회색 */
+      color: #222;
+    }
+
+    .photo-tabs .tab-btn.active {
+      background-color: #4b5563; /* 차콜색 */
+      color: #fff;
+      font-weight: bold;
+    }
+
 
     .gallery {
       display: none;
@@ -116,10 +147,35 @@
       border-radius: 10px;
     }
 
+    .interior-tabs .tab-btn {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .interior-tabs .tab-btn::before {
+      content: "•";
+      color: #333;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .interior-tabs .tab-btn:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .interior-tabs .tab-btn.active {
+      font-weight: bold;
+      color: #000;
+    }
+
+
     footer {
       text-align: center;
       margin-top: 40px;
-      color: #999;
+      color: #999;  
     }
   </style>
 </head>
@@ -153,18 +209,18 @@
 
       if (category === 'home') {
         html = `
-          <h2>홈</h2>
-          <div class="slider">
-            <img id="slide-image" src="images/outside1.jpeg" alt="펜션 사진" />
-          </div>
-          <p>태안 파도리에 위치한 독채 펜션 호연빌리지입니다.</p>
+            <h2 style="text-align:center;">홈</h2>
+            <div class="slider" style="margin: 0 auto;">
+              <img id="slide-image" src="images/outside1.jpeg" alt="펜션 사진" />
+            </div>
+            <p style="text-align:center;">태안 파도리에 위치한 독채 펜션 호연빌리지입니다.</p>
         `;
         contentBox.innerHTML = html;
         startSlider();
       } else if (category === 'photo') {
         html = `
-          <h2>펜션 사진</h2>
-          <p>호연빌리지의 다양한 공간을 사진으로 만나보세요.</p>
+          <h2 style="text-align:center;">펜션 사진</h2>
+          <p style="text-align:center;">호연빌리지의 다양한 공간을 사진으로 만나보세요.</p>
           <div class="photo-tabs">
             <button class="tab-btn active" onclick="showGallery('interior', this)">펜션 내부</button>
             <button class="tab-btn" onclick="showGallery('outside', this)">펜션 외부</button>
@@ -174,12 +230,13 @@
 
           <div class="gallery active" id="interior">
             <div class="photo-tabs interior-tabs">
-              <button class="tab-btn active" onclick="showSubGallery('living', this)">1층 거실</button>
-              <button class="tab-btn" onclick="showSubGallery('kitchen', this)">1층 부엌</button>
-              <button class="tab-btn" onclick="showSubGallery('bathroom', this)">1층 화장실</button>
-              <button class="tab-btn" onclick="showSubGallery('stairs', this)">계단</button>
-              <button class="tab-btn" onclick="showSubGallery('bedroom', this)">2층 침실</button>
+              <button class="tab-btn active" onclick="showSubGallery('living', this)">🛋️ 1층 거실</button>
+              <button class="tab-btn" onclick="showSubGallery('kitchen', this)">🍳 1층 부엌</button>
+              <button class="tab-btn" onclick="showSubGallery('bathroom', this)">🚿 1층 화장실</button>
+              <button class="tab-btn" onclick="showSubGallery('stairs', this)">🪜 계단</button>
+              <button class="tab-btn" onclick="showSubGallery('bedroom', this)">🛏️ 2층 침실</button>
             </div>
+
             <div class="sub-gallery-group active" id="living">
               <div class="sub-gallery">
                 <img src="images/living1.jpeg" />

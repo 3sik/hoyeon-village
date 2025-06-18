@@ -166,24 +166,22 @@
     }
 
     .interior-tabs {
-      display: flex;
-      flex-wrap: nowrap;         /* 줄바꿈 방지 */
-      overflow-x: auto;          /* 가로 스크롤 허용 */
-      gap: 6px;
-      padding: 0 5px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
       margin: 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px 0; /* 위아래 여백 추가 */
+      background-color: #f9f9f9;
     }
 
     .interior-tabs .tab-btn {
-        all: unset;
-        white-space: nowrap;       /* 줄바꿈 방지 */
-        font-size: 14px;
-        padding: 6px 10px;
-        cursor: pointer;
-        background: transparent !important;
-        border: none !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
+      all: unset;
+      text-align: center;
+      font-size: 15px;
+      color: #333;
+      cursor: pointer;
     }
 
     .interior-tabs .tab-btn::before {
@@ -194,13 +192,16 @@
     }
 
     .interior-tabs .tab-btn:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
+        background-color: transparent !important;
+        color: #333 !important;
+        text-decoration: underline;
+        text-underline-offset: 4px;
     }
 
     .interior-tabs .tab-btn.active {
       font-weight: bold;
-      color: #000;
+      background-color: transparent !important;
+      color: #333 !important;
     }
 
 
@@ -208,6 +209,18 @@
       text-align: center;
       margin-top: 40px;
       color: #999;  
+    }
+
+    @media (max-width: 600px) {
+      footer > div {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      footer > div > div {
+        width: 100%;
+        max-width: none;
+      }
     }
   </style>
 </head>
